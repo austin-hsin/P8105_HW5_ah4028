@@ -1,0 +1,25 @@
+---
+title: "P8105_HW5_ah4028"
+author: "Austin Hsin"
+date: "2023-11-14"
+output: github_document
+---
+
+```{r setup, include=FALSE}
+#Setup Code
+library(tidyverse)
+library(broom)
+
+options(
+  ggplot2.continuous.colour = "viridis",
+  ggplot2.continuous.fill = "viridis"
+)
+
+scale_colour_discrete = scale_colour_viridis_d
+scale_fill_discrete = scale_fill_viridis_d
+```
+
+```{r study, message = FALSE}
+file_names = list.files(path = "./data/study", full.names = TRUE)
+
+```
