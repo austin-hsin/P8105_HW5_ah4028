@@ -19,7 +19,20 @@ scale_colour_discrete = scale_colour_viridis_d
 scale_fill_discrete = scale_fill_viridis_d
 ```
 
-```{r study, message = FALSE}
-file_names = list.files(path = "./data/study", full.names = TRUE)
+## Problem 2
 
+```{r study, message = FALSE}
+file_names = list.files(path = "./data/study", full.names = TRUE) #list of all csv file names
+
+study_import = function(path) {
+  
+  df =
+  read_csv(path) |>
+  pivot_longer(week_1:week_8,
+               names_to = "Week",
+               values_to = "Value")
+}
+
+study_df_tidy = map(file_names, study_import) |>
+  bind_rows()
 ```
