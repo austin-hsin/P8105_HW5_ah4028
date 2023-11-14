@@ -45,4 +45,8 @@ study_df_tidy = map(file_names, study_import) |>
 ```
 
 ```{r study_plot}
+study_df_tidy |> 
+  ggplot(aes(x = as.numeric(Week_Num), y = Value, color = subject)) +
+  facet_grid(~arm) + 
+  geom_line(aes(color = subject))
 ```
