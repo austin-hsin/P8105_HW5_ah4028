@@ -24,21 +24,25 @@ scale_fill_discrete = scale_fill_viridis_d
 ```{r study, message = FALSE}
 file_names = list.files(path = "./data/study", full.names = TRUE) #list of all csv file names
 
-study_import = function(path) {
+study_import = function(path) { #creating function to import and tidy csv files
   
   df =
   read_csv(path) |>
     mutate(
-      ID = path 
+      ID = path #creating ID variable from path name
     ) |>
-    separate(ID, into = c("folder", "arm", "a", "subject", "csv"), sep = c(12, 16, 17, 19)) |>
-    arrange(arm, subject) |> 
+    separate(ID, into = c("folder", "arm", "a", "subject", "csv"), sep = c(12, 16, 17, 19)) |> #separating ID into relevant sections
+    arrange(arm, subject) |> #arranging by study arm and subject number
   pivot_longer(week_1:week_8,
                names_to = "Week",
-               values_to = "Value") |>
-     separate(Week, into = c("W", "Week_Num"), sep="_")
+               values_to = "Value") |> #pivoting original csv variables into `Week` and `Value`
+     separate(Week, into = c("W", "Week_Num"), sep="_") |> #separating `Week` to obtain week number
+    select(-folder, -a, -csv, -W) #removing non-pertinent variables
 }
 
 study_df_tidy = map(file_names, study_import) |>
-  bind_rows()
+  bind_rows() #merging all resulting files
+```
+
+```{r study_plot}
 ```
