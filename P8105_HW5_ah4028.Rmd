@@ -111,12 +111,14 @@ reject_df = sim_results |>
   group_by(mu_df) |>
   summarize(mean_mu = mean(mu_hat))
 
+#plot true vs rejected mu
 ggplot(true_df, aes(x = mu_df, y = mean_mu)) +
   geom_line() +
   geom_line(data = reject_df, color = "red") +
-  labs(title = "Comparison of true vs rejected values", x = "mu") +
+  labs(title = "Comparison of true vs rejected mu", x = "mu") +
   scale_x_continuous(breaks = seq(0, 6, 1)) #ensuring all mu values are shown
 ```
 
 From the plot above, the rejected line, shown in red, displays the relationship between true mu values and average mu_hat value of those who were rejected, p_value less than 0.05. This is contrasted by the black line which shows the relationship for all samples. 
 According to the plot, the average mu_hat value of the samples where the null was rejected is not approximately equal to the true mu value for mu values 0 to 3. As mu value increases from 3 to 4, the rejected line begins to approximate true mu value from 4 to 6.
+
